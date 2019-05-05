@@ -91,7 +91,6 @@ bool	ft_pass(t_vm *vm, t_process *process)
 	return (true);
 }
 
-void	start_op(uint8_t op);
 
 bool	read_opcode(t_vm *game, t_process *process)
 {
@@ -99,15 +98,16 @@ bool	read_opcode(t_vm *game, t_process *process)
 
 	mem_read(game->mem, stck, process->offset, 1);
 	process->actual_opcode = stck[0];
+	hook_process_wait_opcode(process, stck[0]);
 	if (process->actual_opcode <= 0 || process->actual_opcode > 16)
 	{
 		if (game->c_pc == 50)
 			printf("decale 1 cycle %ld mem %.2x offset %.4lx\n", game->cycle, game->mem[process->offset], process->offset);
 		process->offset = (process->offset + 1) % MEM_SIZE;
+		hook_process_adv(process, 1);
 		process->actual_opcode = 0;
 		return (false);
 	}
-	start_op(process->actual_opcode);
 	process->has_read = true;
 	process->cycle_to_do = g_ops[stck[0]].cycle - 1;
 	return (true);

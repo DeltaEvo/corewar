@@ -48,6 +48,7 @@ bool	carry_up(t_vm *vm, t_process *process, uint8_t ocp, int opcode)
 	i = 0;
 	process->carry = true;
 	decale = get_decale(ocp, opcode);
+	hook_process_adv(process, decale);
 	if (vm->flags.verbose)
 	{
 		ft_putf_fd(vm->v_fd, "ADV %d (0x%4X -> 0x%4X) ", decale, process->offset, ((process->offset + decale)));
@@ -74,6 +75,7 @@ bool	carry_down(t_vm *vm, t_process *process, uint8_t ocp, int opcode)
 	i = 0;
 	decale = get_decale(ocp, opcode);
 	process->carry = false;
+	hook_process_adv(process, decale);
 	if (vm->flags.verbose)
 	{
 		ft_putf_fd(vm->v_fd, "ADV %d (0x%4X -> 0x%4X) ", decale, process->offset, ((process->offset + decale)));
@@ -99,6 +101,7 @@ bool	invalid(t_vm *vm, t_process *process, uint8_t ocp, int opcode)
 
 	i = 0;
 	decale = get_decale(ocp, opcode);
+	hook_process_adv(process, decale);
 	if (vm->flags.verbose)
 	{
 		ft_putf_fd(vm->v_fd, "ADV %d (0x%4X -> 0x%4X) ", decale, process->offset, ((process->offset + decale)));
@@ -124,6 +127,7 @@ bool	valid(t_vm *vm, t_process *process, uint8_t ocp, int opcode)
 
 	i = 0;
 	decale = get_decale(ocp, opcode);
+	hook_process_adv(process, decale);
 	if (vm->flags.verbose)
 	{
 		ft_putf_fd(vm->v_fd, "ADV %d (0x%4X -> 0x%4X) ", decale, process->offset, ((process->offset + decale)));

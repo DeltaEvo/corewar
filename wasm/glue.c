@@ -24,6 +24,16 @@ export size_t			get_vm_mem_size()
 	return MEM_SIZE;
 }
 
+export size_t			get_process_size()
+{
+	return sizeof(t_process);
+}
+
+export t_process		*get_vm_vec_processes(t_vm *vm)
+{
+	return vm->vec->processes;
+}
+
 export t_vec			**get_vm_vec(t_vm *vm)
 {
 	return &vm->vec;

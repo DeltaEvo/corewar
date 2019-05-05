@@ -144,4 +144,12 @@ extern t_core_fcnt g_fcnt[17];
 
 void	ft_dump_mem(t_vm vm, bool ex);
 
+/*
+** Hooks
+*/
+void	hook_process_adv(t_process *process, ssize_t diff);
+void	hook_cycle_end();
+void	hook_process_wait_opcode(t_process *process, uint8_t opcode);
+void	hook_process_write_memory(t_process *process, size_t from, size_t to);
+
 #endif

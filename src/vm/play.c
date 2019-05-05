@@ -149,6 +149,7 @@ bool	vm_cycle_to_die(t_vm *vm)
 
 #include <stdio.h>
 
+
 void	david_needs_to_work(t_vm *vm)
 {
 	ssize_t i;
@@ -210,6 +211,7 @@ void	david_needs_to_work(t_vm *vm)
 			ft_putf_fd(vm->v_fd, "\n");
 			exit(0);
 		}
+		hook_cycle_end();
 		vm->continu = vm_cycle_to_die(vm);
 	}
 	return ;
